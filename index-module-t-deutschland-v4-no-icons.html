@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module-T Deutschland | Proje Çözüm Bulucu</title>
+<style>
+:root{
+  --red:#BE1823;
+  --text:#18212a;
+  --muted:#697078;
+  --border:#e3e6ea;
+  --light:#f6f7f9;
+  --dark:#28394b;
+  --dark2:#33475b;
+  --darkBorder:#6f8092;
+  --white:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff}
+a{text-decoration:none}
+#app{max-width:1180px;margin:36px auto;padding:0 20px 50px}
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+h1{margin:0 0 10px;font-size:36px;line-height:1.12}
+h2{margin:8px 0 8px;font-size:28px;line-height:1.2}
+p{margin:0}
+.desc{max-width:760px;color:var(--muted);font-size:15px;line-height:1.6}
+.btn,.linkBtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 20px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;
+}
+.btn{border:0}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:#a5141e}
+.btn-secondary{background:#fff;color:var(--text);border:1px solid var(--border)}
+.progress{height:6px;background:#eceff2;border-radius:99px;overflow:hidden;margin-top:26px}
+.progressBar{height:100%;width:20%;background:var(--red);transition:.25s}
+.stepLine{display:flex;align-items:center;gap:8px;margin-top:18px}
+.dot{
+  width:32px;height:32px;flex:0 0 32px;border-radius:50%;
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;background:#fff;color:var(--muted)
+}
+.dot.active{background:var(--red);border-color:var(--red);color:#fff}
+.line{height:1px;flex:1;background:var(--border)}
+.wizard{margin-top:18px}
+.stepMeta{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted)}
+.questionLead{display:block;margin-top:18px}
+.qBadge{display:none}
+.helper{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.55}
+.options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.option{
+  position:relative;border:1px solid var(--border);border-radius:16px;background:#fff;
+  padding:16px;cursor:pointer;text-align:left;min-height:104px;transition:.18s;
+}
+.option:hover{transform:translateY(-1px);border-color:#c7ccd2;box-shadow:0 6px 18px rgba(20,30,40,.05)}
+.option.selected{border:2px solid var(--red);background:#fff8f8;padding:15px}
+.option.selected:after{
+  content:"✓";position:absolute;top:12px;right:13px;color:var(--red);font-weight:700;font-size:16px
+}
+.optionTop{display:block}
+.iconWrap{display:none}
+.optionTitle{font-size:16px;font-weight:700;line-height:1.35}
+.optionSub{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.45}
+.actions{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:22px;margin-top:28px}
+.actions .btn[disabled]{opacity:.4;cursor:not-allowed}
+.results{display:none;margin-top:26px}
+.resultsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.product{
+  border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff;height:100%;
+}
+.productHead{
+  background:var(--light);padding:18px 18px 16px;display:flex;align-items:flex-start;justify-content:space-between;min-height:108px
+}
+.productType{font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--red);text-transform:uppercase}
+.visualBox{
+  width:58px;height:44px;border:2px solid #666;border-radius:2px;position:relative;background:#fff
+}
+.visualBox:before,.visualBox:after{content:"";position:absolute;background:#666}
+.visualBox:before{height:2px;width:100%;left:0;top:11px;opacity:.2}
+.productBody{padding:20px}
+.productTitle{font-size:18px;font-weight:700;line-height:1.3}
+.productText{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.55}
+.tag{display:inline-block;border:1px solid var(--border);border-radius:99px;padding:6px 10px;margin:10px 5px 0 0;font-size:10px;color:var(--muted)}
+.liveList{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.liveLabel{font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.liveModel{font-size:12px;line-height:1.55;color:#44515d;margin:4px 0}
+.customBadge{
+  display:inline-block;background:#fff2f3;color:var(--red);border:1px solid #f0c7cb;
+  border-radius:99px;padding:6px 10px;font-size:10px;font-weight:700;margin-top:12px
+}
+.productActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.productLink,.projectLink{
+  display:inline-flex;align-items:center;justify-content:center;border-radius:9px;padding:10px 12px;font-size:12px;font-weight:700
+}
+.productLink{background:var(--red);color:#fff}
+.projectLink{border:1px solid var(--border);background:#fff;color:var(--text);cursor:pointer}
+.lead{display:none;margin-top:20px;background:var(--dark);color:#fff;border-radius:20px;padding:30px;position:relative}
+.leadClose{position:absolute;right:16px;top:10px;border:0;background:transparent;color:#fff;font-size:30px;cursor:pointer;opacity:.8}
+.lead h2{font-size:42px;color:#fff;margin:0 40px 10px 0}
+.leadSub{font-size:16px;line-height:1.55;color:#d9e0e8;margin-bottom:24px}
+.summary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;font-size:13px;line-height:1.75;margin-bottom:24px}
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.formGrid label{font-size:14px;font-weight:700}
+.formGrid input,.formGrid textarea{
+  width:100%;margin-top:8px;padding:16px 14px;border-radius:10px;border:1px solid var(--darkBorder);
+  background:var(--dark2);color:#fff;font:inherit
+}
+.formGrid input::placeholder,.formGrid textarea::placeholder{color:#aab5c0}
+.formGrid textarea{min-height:120px;resize:vertical}
+.full{grid-column:1/-1}
+.req{color:#ff6876}
+.submitRow{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:18px}
+.submitNote{font-size:12px;line-height:1.55;color:#cfd7df;max-width:520px}
+.submitBtn{background:var(--red);color:#fff;border:0;border-radius:9px;padding:15px 24px;font-weight:700;cursor:pointer}
+.formMsg{display:none;margin-top:16px;padding:14px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);font-size:13px}
+.success{display:none;text-align:center;padding:32px 10px}
+.success h3{font-size:30px;margin:0 0 10px}
+.success p{color:#d9e0e8;line-height:1.6}
+.noteCard{margin-top:16px}
+.smallNote{font-size:13px;color:var(--muted);line-height:1.55}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.legend span{font-size:12px;color:var(--muted);background:var(--light);padding:7px 10px;border-radius:999px}
+.mini-structure{display:flex;gap:4px;align-items:flex-end}
+.ms-box{width:14px;height:14px;border:2px solid #767676;background:#fff}
+.ms-tall{height:24px}
+.ms-wide{width:22px}
+svg{display:block}
+@media(max-width:980px){
+  .options,.resultsGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .top{display:block}
+  .top .btn-secondary{margin-top:16px}
+  .formGrid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .lead h2{font-size:32px}
+  .submitRow{display:block}
+  .submitBtn{width:100%;margin-top:14px}
+}
+@media(max-width:620px){
+  #app{margin:18px auto;padding:0 12px 35px}
+  .card,.lead{padding:20px}
+  h1{font-size:28px}
+  h2{font-size:23px}
+  .options,.resultsGrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="eyebrow">Module-T Deutschland</div>
+        <h1>Projenize en uygun modüler çözümü bulun</h1>
+        <p class="desc">5 kısa soruyu yanıtlayın. İhtiyacınıza göre en uygun ürün gruplarını, mümkünse canlı ürünleri ve uygun olmadığında özel proje yönlendirmesini gösterelim.</p>
+      </div>
+      <button id="reset" class="btn btn-secondary" type="button">Yeniden başlat</button>
+    </div>
+    <div class="progress"><div id="progressBar" class="progressBar"></div></div>
+    <div class="stepLine">
+      <div class="dot active" data-dot="1">1</div><div class="line"></div>
+      <div class="dot" data-dot="2">2</div><div class="line"></div>
+      <div class="dot" data-dot="3">3</div><div class="line"></div>
+      <div class="dot" data-dot="4">4</div><div class="line"></div>
+      <div class="dot" data-dot="5">5</div>
+    </div>
+  </div>
+
+  <div id="wizard" class="card wizard">
+    <div id="question"></div>
+    <div class="actions">
+      <button id="prev" class="btn btn-secondary" type="button">Geri</button>
+      <button id="next" class="btn btn-primary" type="button">Devam et</button>
+    </div>
+  </div>
+
+  <div id="results" class="results">
+    <div class="eyebrow">Proje çözümünüz</div>
+    <h2 id="resultsTitle"></h2>
+    <p id="resultsText" class="desc"></p>
+    <div id="resultsGrid" class="resultsGrid"></div>
+
+    <div class="card noteCard">
+      <div class="top">
+        <div>
+          <strong>Sonraki adımda ne olacak?</strong>
+          <p class="smallNote" style="margin-top:6px">Seçimlerinize göre ya ilgili canlı ürün/kategori sayfalarına geçebilir ya da doğrudan teklif formuna ulaşabilirsiniz. Sitede birebir karşılık olmayan ihtiyaçlar için Module-T Deutschland ekibi proje bazlı çözüm sunabilir.</p>
+          <div class="legend">
+            <span>Canlı ürün gösterilebiliyorsa kategoriye yönlendirir</span>
+            <span>Standart eşleşme yoksa özel proje çözümüne geçirir</span>
+          </div>
+        </div>
+        <button id="requestTop" class="btn btn-primary" type="button">Tüm proje için teklif al</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lead" class="lead">
+    <button id="leadClose" class="leadClose" type="button" aria-label="Kapat">×</button>
+    <div id="formWrap">
+      <div class="eyebrow" style="color:#ffb7be">Module-T Deutschland</div>
+      <h2>24 saat içinde hızlı teklif alın!</h2>
+      <p class="leadSub">Proje cevaplarınız ve önerilen ürünler bu talebe otomatik olarak eklenecektir. Böylece satış ekibimiz size çok daha hızlı ve doğru şekilde dönüş yapabilir.</p>
+
+      <div id="leadSummary" class="summary"></div>
+
+      <form id="leadForm" action="https://formspree.io/f/FORM_ENDPOINT" method="POST">
+        <input type="hidden" name="Kullanim_Amaci" id="hiddenUse" />
+        <input type="hidden" name="Kisi_Sayisi" id="hiddenPeople" />
+        <input type="hidden" name="Ihtiyac_Alanlari" id="hiddenNeeds" />
+        <input type="hidden" name="Yapi_Kurgusu" id="hiddenForm" />
+        <input type="hidden" name="Oncelik" id="hiddenPriority" />
+        <input type="hidden" name="Onerilen_Urunler" id="hiddenProducts" />
+        <input type="hidden" name="_subject" value="Module-T Deutschland | Yeni Projektplaner Talebi" />
+
+        <div class="formGrid">
+          <label>Ad Soyad <span class="req">*</span>
+            <input type="text" name="Ad_Soyad" placeholder="Ad Soyad" required />
+          </label>
+          <label>Firma
+            <input type="text" name="Firma" placeholder="Firma" />
+          </label>
+          <label>E-posta <span class="req">*</span>
+            <input type="email" name="Eposta" placeholder="E-posta" required />
+          </label>
+          <label>Telefon <span class="req">*</span>
+            <input type="tel" name="Telefon" placeholder="Telefon" required />
+          </label>
+          <label>Şehir <span class="req">*</span>
+            <input type="text" name="Sehir" placeholder="Şehir" required />
+          </label>
+          <label>Posta Kodu <span class="req">*</span>
+            <input type="text" name="Posta_Kodu" placeholder="Posta Kodu" required />
+          </label>
+          <label class="full">Teslimat Adresi
+            <textarea name="Teslimat_Adresi" placeholder="Teslimat adresinizi yazın"></textarea>
+          </label>
+          <label class="full">Mesajınız
+            <textarea name="Mesaj" placeholder="Projenizle ilgili ek bilgileri yazın"></textarea>
+          </label>
+        </div>
+
+        <div class="submitRow">
+          <div class="submitNote">Not: Form gönderildiğinde planner’daki 5 cevabınız ve önerilen ürün grupları da e-postaya eklenir. Formspree endpoint’i eklendiğinde bu form doğrudan gerçek e-posta gönderir.</div>
+          <button class="submitBtn" type="submit">Teklif talebi gönder</button>
+        </div>
+
+        <div id="formMsg" class="formMsg"></div>
+      </form>
+    </div>
+
+    <div id="success" class="success">
+      <h3>Talebiniz başarıyla alındı.</h3>
+      <p>Module-T Deutschland ekibine proje bilgileriniz iletildi. Ekibimiz sizinle en kısa sürede iletişime geçecektir.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const root=document.getElementById('app');
+  const q=s=>root.querySelector(s);
+  const qa=s=>[...root.querySelectorAll(s)];
+
+  let step=0;
+  let answers={
+    use:'construction',
+    people:'15',
+    needs:['office'],
+    form:'recommend',
+    priority:'recommend'
+  };
+
+  const icon = {
+    construction:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M6 22V13l10-5 10 5v9" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 22v-4.5h12V22" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3.5 25.5h25" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M16 8V5.5" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    office:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="6" y="7" width="20" height="12" rx="2" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M12 25h8M16 19v6" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M10 11.5h12" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+    </svg>`,
+    staff:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="3.2" stroke="#BE1823" stroke-width="2.2"/>
+      <circle cx="21" cy="12.2" r="2.7" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M5.5 24c1-3.8 3.9-6 7.5-6s6.6 2.2 7.6 6" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M18.5 23.8c.6-2.4 2.4-4.2 4.9-4.9" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    living:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M5 18h22v6H5z" stroke="#BE1823" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M7 17v-5h6a4 4 0 0 1 4 4v1" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M19 13h5a3 3 0 0 1 3 3v2" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    sport:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="8" y="5.5" width="16" height="21" rx="2.2" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M12 10.5h8M12 15.8h8M12 21.1h8" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="21.5" cy="9.5" r="1.2" fill="#BE1823"/>
+    </svg>`,
+    education:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M4.5 12L16 6.5 27.5 12 16 17.5 4.5 12Z" stroke="#BE1823" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M8.5 14.2v5c0 2.1 3.4 3.8 7.5 3.8s7.5-1.7 7.5-3.8v-5" stroke="#BE1823" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M27.5 12v6" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    security:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 5.5 24.5 9v6.2c0 5-3.5 8.9-8.5 11.3-5-2.4-8.5-6.3-8.5-11.3V9L16 5.5Z" stroke="#BE1823" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M16 11v10M11 16h10" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+    </svg>`,
+    other:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="10" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M12.8 12.6a3.4 3.4 0 1 1 5.5 2.7c-1 .8-2 1.4-2 3" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="16" cy="22.8" r="1.3" fill="#BE1823"/>
+    </svg>`,
+    people:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="3" stroke="#BE1823" stroke-width="2.2"/>
+      <circle cx="20.5" cy="10.5" r="2.5" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M6 24c.8-3.5 3.5-5.8 6.8-5.8 3.4 0 6 2.3 6.9 5.8" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M17.6 24c.5-2 2-3.7 4.3-4.4" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    area:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="6" y="6" width="20" height="20" rx="2.5" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M16 6v20M6 16h20" stroke="#BE1823" stroke-width="2.2" opacity=".5"/>
+      <path d="M11 11h2M19 11h2M11 19h2M19 19h2" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    priority:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="9.5" stroke="#BE1823" stroke-width="2.2"/>
+      <circle cx="16" cy="16" r="5.5" stroke="#BE1823" stroke-width="2.2" opacity=".65"/>
+      <circle cx="16" cy="16" r="1.9" fill="#BE1823"/>
+    </svg>`,
+    compact:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="5.5" y="10" width="21" height="12" rx="1.8" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M10 22v-4h12v4" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    separate:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="3.5" y="12" width="7" height="7" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="12.5" y="12" width="7" height="7" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="21.5" y="12" width="7" height="7" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+    </svg>`,
+    connected:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="4.5" y="11" width="10.5" height="10" rx="1.4" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="17" y="11" width="10.5" height="10" rx="1.4" stroke="#BE1823" stroke-width="2.2"/>
+      <path d="M15 16h2" stroke="#BE1823" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+    multistorey:`<svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="6.5" y="16.5" width="8" height="8" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="17.5" y="16.5" width="8" height="8" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="6.5" y="7.5" width="8" height="8" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+      <rect x="17.5" y="7.5" width="8" height="8" rx="1.2" stroke="#BE1823" stroke-width="2.2"/>
+    </svg>`
+  };
+
+  const questions = [
+    {
+      key:'use',
+      title:'Projeniz hangi alanda kullanılacak?',
+      description:'Projenin bulunduğu ortamı seçin. Bir sonraki adımlarda ihtiyaç duyduğunuz alanları ayrıca belirleyeceğiz.',
+      badge:'',
+      multi:false,
+      choices:[
+        ['construction','Şantiye','İnşaat sahası, geçici proje alanı veya saha kullanımı',''],
+        ['industry','Fabrika / Sanayi tesisi','Üretim alanı, fabrika veya endüstriyel tesis',''],
+        ['education','Okul / Eğitim alanı','Okul, sınıf, kurs veya eğitim tesisi',''],
+        ['sport','Spor tesisi / Kulüp','Spor kulübü, saha, tesis veya takım kullanımı',''],
+        ['living','Konaklama alanı','Personel, işçi veya geçici yaşam alanı',''],
+        ['office','Ticari / Ofis alanı','Ofis, satış alanı, yönetim veya ticari kullanım',''],
+        ['other','Diğer','Farklı veya özel kullanım alanı','']
+      ]
+    },
+    {
+      key:'people',
+      title:'Yaklaşık kaç kişi kullanacak?',
+      description:'Yaklaşık sayı yeterlidir. Doğru kapasite önerisi için bu bilgi önemlidir.',
+      badge: icon.people,
+      multi:false,
+      choices:[
+        ['5','1–5 kişi','Kompakt kullanım',icon.people],
+        ['15','6–15 kişi','Küçük ekip',icon.people],
+        ['30','16–30 kişi','Orta ölçekli kullanım',icon.people],
+        ['50','31–50 kişi','Yoğun kullanım',icon.people],
+        ['80','50+ kişi','Büyük proje / yüksek kapasite',icon.people]
+      ]
+    },
+    {
+      key:'needs',
+      title:'Tam olarak hangi alanlara ihtiyacınız var?',
+      description:'Birden fazla seçim yapabilirsiniz. Burada ürün değil, ihtiyacınızı seçin.',
+      badge: icon.area,
+      multi:true,
+      choices:[
+        ['office','Çalışma / Ofis alanı','Masa başı çalışma, yönetim veya proje ofisi',icon.office],
+        ['wc','WC','Tuvalet ihtiyacı',icon.area],
+        ['shower','Duş','Duş kabini / ıslak hacim',icon.area],
+        ['changing','Soyunma alanı','Kıyafet değişimi ve dolap alanı',icon.sport],
+        ['kitchen','Dinlenme / Mutfak','Mola, yemekhane veya mutfak kullanımı',icon.living],
+        ['living','Konaklama','Yataklı yaşam alanı',icon.living],
+        ['security','Güvenlik / Karşılama','Kontrol noktası veya danışma alanı',icon.security],
+        ['storage','Depolama','Malzeme veya ekipman depolama',icon.other]
+      ]
+    },
+    {
+      key:'form',
+      title:'Yapı nasıl kurgulanmalı?',
+      description:'Eğer emin değilseniz, Module-T Deutschland uygun yapı tipini önerebilir.',
+      badge: icon.connected,
+      multi:false,
+      choices:[
+        ['compact','Tek kompakt ünite','Tüm ihtiyaçlar mümkün olduğunca tek yapıda',icon.compact],
+        ['separate','Birkaç ayrı konteyner','İhtiyaçlara göre birden fazla bağımsız modül',icon.separate],
+        ['connected','Birbirine bağlı daha büyük yapı','Birleşik ve daha bütüncül modüler çözüm',icon.connected],
+        ['multistorey','Çok katlı modüler bina','Daha büyük ve katlı modüler yapı',icon.multistorey],
+        ['recommend','Emin değilim, Module-T Deutschland önersin','En uygun yapı sistemini biz belirleyelim',icon.other]
+      ]
+    },
+    {
+      key:'priority',
+      title:'Sizin için en önemli konu hangisi?',
+      description:'Bu cevap, önerinin tonunu belirler: daha kompakt, daha konforlu veya daha esnek.',
+      badge: icon.priority,
+      multi:false,
+      choices:[
+        ['compact','En az alanda en verimli çözüm','Yer tasarrufu öncelikli',icon.priority],
+        ['capacity','Daha fazla kişi kapasitesi','Kullanıcı sayısı öncelikli',icon.priority],
+        ['comfort','Daha konforlu kullanım','Daha rahat ve donanımlı çözüm',icon.priority],
+        ['rooms','Ayrı odalar / bölümler','Fonksiyonların ayrılması öncelikli',icon.priority],
+        ['expand','Sonradan büyütülebilmesi','Gelecekte genişlemeye uygun çözüm',icon.priority],
+        ['recommend','En uygun çözümü Module-T Deutschland önersin','Kararı birlikte netleştirelim',icon.priority]
+      ]
+    }
+  ];
+
+  const liveCatalogue = {
+    office:{
+      title:'Ofis Konteyneri',
+      description:'Esnek çalışma alanları, proje ofisleri ve yönetim alanları.',
+      categoryUrl:'https://module-t.de/product-category/buerocontainer/'
+    },
+    sanitary:{
+      title:'Sanitasyon Konteyneri',
+      description:'WC, duş ve lavabo ihtiyaçları için modüler sanitasyon çözümleri.',
+      categoryUrl:'https://module-t.de/product-category/sanitaercontainer/'
+    },
+    changing:{
+      title:'Soyunma Odası Konteyneri',
+      description:'Personel ve kullanıcılar için soyunma, duş ve personel alanları.',
+      categoryUrl:'https://module-t.de/product-category/umkleidecontainer/'
+    },
+    living:{
+      title:'Yaşam / Konaklama Çözümü',
+      description:'Konaklama ve yaşam alanları proje ihtiyaçlarına göre planlanabilir.',
+      categoryUrl:'https://module-t.de/produkte/'
+    },
+    kitchen:{
+      title:'Dinlenme / Mutfak Çözümü',
+      description:'Mola, dinlenme ve mutfak alanları için proje bazlı çözüm.',
+      categoryUrl:'https://module-t.de/produkte/'
+    },
+    security:{
+      title:'Güvenlik / Karşılama Konteyneri',
+      description:'Karşılama, kontrol ve güvenlik çalışma alanları.',
+      categoryUrl:'https://module-t.de/produkte/'
+    },
+    storage:{
+      title:'Depo Konteyneri',
+      description:'Malzeme, ekipman ve depolama için ek alan.',
+      categoryUrl:'https://module-t.de/produkte/'
+    },
+    modular:{
+      title:'Modüler Yapı',
+      description:'Birden fazla modülün bir araya geldiği, projeye özel yapı çözümü.',
+      categoryUrl:'https://module-t.de/produkte/'
+    }
+  };
+
+  function reorderNeedsChoices(){
+    const q3 = questions[2];
+    const base = [...q3.choices];
+    const priorityMap = {
+      construction:['office','wc','shower','changing','kitchen','storage','security','living'],
+      office:['office','wc','kitchen','security','storage','shower','changing','living'],
+      industry:['changing','wc','shower','kitchen','office','storage','security','living'],
+      living:['living','wc','shower','kitchen','office','storage','changing','security'],
+      sport:['changing','shower','wc','office','kitchen','storage','security','living'],
+      education:['office','wc','kitchen','storage','security','shower','changing','living'],
+      office:['office','wc','kitchen','security','storage','shower','changing','living'],
+      other:['office','wc','shower','changing','kitchen','living','security','storage']
+    };
+    const order = priorityMap[answers.use] || priorityMap.other;
+    q3.choices = order.map(key => base.find(item => item[0]===key)).filter(Boolean);
+  }
+
+  function renderQuestion(){
+    reorderNeedsChoices();
+    const item = questions[step];
+    let html = `
+      <div class="stepMeta">ADIM ${step+1} / 5</div>
+      <div class="questionLead">
+        <h2>${item.title}</h2>
+        <p class="helper">${item.description}</p>
+      </div>
+      <div class="options">
+    `;
+
+    item.choices.forEach(choice=>{
+      const [value,title,sub,visual] = choice;
+      const selected = item.multi ? answers[item.key].includes(value) : answers[item.key]===value;
+      html += `
+        <button class="option ${selected ? 'selected':''}" type="button" data-value="${value}">
+          <div class="optionTop">
+            <div class="optionTitle">${title}</div>
+            <div class="optionSub">${sub}</div>
+          </div>
+        </button>
+      `;
+    });
+
+    html += `</div>`;
+    q('#question').innerHTML = html;
+
+    qa('.option').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const value = btn.dataset.value;
+        if(item.multi){
+          let arr = [...answers[item.key]];
+          arr = arr.includes(value) ? arr.filter(v=>v!==value) : [...arr, value];
+          if(!arr.length) arr = [value];
+          answers[item.key] = arr;
+          renderQuestion();
+        }else{
+          answers[item.key] = value;
+          renderQuestion();
+        }
+      });
+    });
+
+    q('#prev').disabled = step===0;
+    q('#next').textContent = step===4 ? 'Çözümü göster' : 'Devam et';
+    q('#progressBar').style.width = ((step+1)*20) + '%';
+    qa('.dot').forEach(d=>d.classList.toggle('active', Number(d.dataset.dot) <= step+1));
+  }
+
+  function officeModelRecommendations(){
+    const p = Number(answers.people);
+    const hasWC = answers.needs.includes('wc');
+    const hasKitchen = answers.needs.includes('kitchen');
+
+    if(hasKitchen) return ['OC-A6000.3 – mutfaklı 20 ft ofis'];
+    if(hasWC && p<=5) return ['OC-A6000.4 – WC’li 20 ft ofis','OC-21 – çalışma alanı + sanitasyon'];
+    if(hasWC && p>5) return ['OC-22 – çift ofis + merkezi sanitasyon','OC-21 – çalışma alanı + sanitasyon'];
+    if(p<=5) return ['OC-A3000.1 – kompakt 10 ft ofis','OC-A6000.1 – 20 ft açık ofis'];
+    if(p<=15) return ['OC-A6000.1 – 20 ft açık ofis','OC-A6000.2 – iki ayrı ofis'];
+    return [];
+  }
+
+  function sanitaryModelRecommendations(){
+    const p = Number(answers.people);
+    const shower = answers.needs.includes('shower');
+    if(shower && p<=15) return ['SC-A3000.4 – duş + WC','SC-A3000.3 – 3 duş kabini'];
+    if(shower && p>15) return [];
+    if(!shower && p<=15) return ['SN-20 / SN-21 / SN-22 – kompakt modeller','SC-A3000.2 – 3 ayrı kabin'];
+    return [];
+  }
+
+  function changingModelRecommendations(){
+    const p = Number(answers.people);
+    const shower = answers.needs.includes('shower');
+    if(shower && p<=15) return ['LC-A3000.2 / LC-A3000.4 – duşlu kompakt modeller','LC-A6000.2 – duşlu 14,4 m² model'];
+    if(!shower && p<=15) return ['LC-A3000.1 – kompakt soyunma alanı','LC-A6000.1 – 20 ft soyunma konteyneri'];
+    return [];
+  }
+
+  function solutions(){
+    const n = answers.needs;
+    const out = [];
+
+    if(n.includes('office')){
+      const x = {...liveCatalogue.office};
+      x.recommended = officeModelRecommendations();
+      x.custom = x.recommended.length===0;
+      out.push(x);
+    }
+    if(n.includes('wc') || n.includes('shower')){
+      const x = {...liveCatalogue.sanitary};
+      x.recommended = sanitaryModelRecommendations();
+      x.custom = x.recommended.length===0;
+      out.push(x);
+    }
+    if(n.includes('changing')){
+      const x = {...liveCatalogue.changing};
+      x.recommended = changingModelRecommendations();
+      x.custom = x.recommended.length===0;
+      out.push(x);
+    }
+    if(n.includes('living')) out.push({...liveCatalogue.living, recommended:[], custom:true});
+    if(n.includes('kitchen') && !n.includes('office')) out.push({...liveCatalogue.kitchen, recommended:[], custom:true});
+    if(n.includes('security')) out.push({...liveCatalogue.security, recommended:[], custom:true});
+    if(n.includes('storage')) out.push({...liveCatalogue.storage, recommended:[], custom:true});
+    if(answers.form==='connected' || answers.form==='multistorey'){
+      out.push({...liveCatalogue.modular, recommended:[], custom:true});
+    }
+
+    return out;
+  }
+
+  function label(questionIndex, value){
+    const found = questions[questionIndex].choices.find(i=>i[0]===value);
+    return found ? found[1] : value;
+  }
+
+  function showResults(){
+    const items = solutions();
+    const titles = {
+      construction:'Şantiye projeniz için önerilen çözüm',
+      office:'Ofis ve yönetim için önerilen çözüm',
+      industry:'Fabrika / sanayi projeniz için önerilen çözüm',
+      living:'Konaklama için önerilen çözüm',
+      sport:'Spor tesisi / kulüp kullanımı için önerilen çözüm',
+      education:'Eğitim projeniz için önerilen çözüm',
+      office:'Ticari / ofis projeniz için önerilen çözüm',
+      other:'Projeniz için önerilen modüler çözüm'
+    };
+
+    q('#wizard').style.display = 'none';
+    q('#results').style.display = 'block';
+    q('#lead').style.display = 'none';
+    q('#resultsTitle').textContent = titles[answers.use] || titles.other;
+
+    const peopleText = label(1, answers.people);
+    q('#resultsText').textContent =
+      items.length > 1
+      ? `Seçimlerinize göre ${items.length} farklı çözüm bileşeni öneriyoruz. Tahmini kullanım kapasitesi: ${peopleText}. Canlı ürün olan alanlarda kategori yönlendirmesi, özel ihtiyaçlarda ise proje bazlı teklif akışı sunulur.`
+      : `Seçimlerinize göre kompakt bir çözüm öneriyoruz. Tahmini kullanım kapasitesi: ${peopleText}.`;
+
+    q('#resultsGrid').innerHTML = items.map((x,i)=>{
+      const models = x.recommended && x.recommended.length
+        ? `<div class="liveList"><div class="liveLabel">Sitedeki uygun canlı modeller</div>${x.recommended.map(m=>`<div class="liveModel">• ${m}</div>`).join('')}</div>`
+        : `<div class="customBadge">Özel proje çözümü gerekli</div><div class="liveModel" style="margin-top:8px">Bu ihtiyaç için birebir standart bir canlı ürün göstermiyoruz. Module-T Deutschland ekibi sizin için en uygun konfigürasyonu belirleyebilir.</div>`;
+
+      const productBtn = x.recommended && x.recommended.length
+        ? `<a class="productLink" href="${x.categoryUrl}" target="_blank" rel="noopener">Canlı ürünleri görüntüle</a>`
+        : '';
+
+      return `
+        <div class="product">
+          <div class="productHead">
+            <div class="productType">${i===0 ? 'Ana çözüm' : 'Ek çözüm'}</div>
+            <div class="visualBox"></div>
+          </div>
+          <div class="productBody">
+            <div class="productTitle">${x.title}</div>
+            <div class="productText">${x.description}</div>
+            <span class="tag">${answers.priority==='expand' ? 'Genişletilebilir' : 'Projeye özel planlanabilir'}</span>
+            <span class="tag">${answers.form==='recommend' ? 'Module-T Deutschland önerisi' : 'Seçiminize göre eşleştirildi'}</span>
+            ${models}
+            <div class="productActions">
+              ${productBtn}
+              <button class="projectLink openRequest" type="button">Bu çözüm için teklif al</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    qa('.openRequest').forEach(btn=>{
+      btn.addEventListener('click', openLeadForm);
+    });
+
+    q('#results').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function fillLeadData(){
+    const items = solutions();
+    const use = label(0, answers.use);
+    const people = label(1, answers.people);
+    const needs = answers.needs.map(v => {
+      const found = questions[2].choices.find(i=>i[0]===v);
+      return found ? found[1] : v;
+    }).join(', ');
+    const form = label(3, answers.form);
+    const priority = label(4, answers.priority);
+    const products = items.map(i=>i.title).join(', ');
+
+    q('#hiddenUse').value = use;
+    q('#hiddenPeople').value = people;
+    q('#hiddenNeeds').value = needs;
+    q('#hiddenForm').value = form;
+    q('#hiddenPriority').value = priority;
+    q('#hiddenProducts').value = products;
+
+    q('#leadSummary').innerHTML =
+      `<strong>Kullanım amacı:</strong> ${use}<br>` +
+      `<strong>Kişi sayısı:</strong> ${people}<br>` +
+      `<strong>İhtiyaç alanları:</strong> ${needs}<br>` +
+      `<strong>Yapı kurgusu:</strong> ${form}<br>` +
+      `<strong>Öncelik:</strong> ${priority}<br>` +
+      `<strong>Önerilen ürünler:</strong> ${products || 'Özel proje çözümü'}`;
+  }
+
+  function openLeadForm(){
+    fillLeadData();
+    q('#lead').style.display = 'block';
+    q('#lead').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  q('#next').addEventListener('click', ()=>{
+    if(step < 4){
+      step++;
+      renderQuestion();
+    }else{
+      showResults();
+    }
+  });
+
+  q('#prev').addEventListener('click', ()=>{
+    if(step>0){
+      step--;
+      renderQuestion();
+    }
+  });
+
+  q('#requestTop').addEventListener('click', openLeadForm);
+  q('#leadClose').addEventListener('click', ()=> q('#lead').style.display='none');
+
+  q('#leadForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const form = e.currentTarget;
+    const endpoint = form.getAttribute('action');
+
+    if(endpoint.includes('FORM_ENDPOINT')){
+      q('#formMsg').style.display='block';
+      q('#formMsg').innerHTML = '<strong>Formspree henüz bağlanmadı.</strong><br>Endpoint eklendiğinde bu form doğrudan gerçek e-posta gönderecek.';
+      return;
+    }
+
+    const data = new FormData(form);
+
+    try{
+      const response = await fetch(endpoint, {
+        method:'POST',
+        body:data,
+        headers:{'Accept':'application/json'}
+      });
+
+      if(response.ok){
+        q('#formWrap').style.display='none';
+        q('#success').style.display='block';
+      }else{
+        q('#formMsg').style.display='block';
+        q('#formMsg').textContent='Form gönderilemedi. Lütfen tekrar deneyin.';
+      }
+    }catch(err){
+      q('#formMsg').style.display='block';
+      q('#formMsg').textContent='Bağlantı hatası oluştu. Lütfen tekrar deneyin.';
+    }
+  });
+
+  q('#reset').addEventListener('click', ()=>{
+    step = 0;
+    answers = {
+      use:'construction',
+      people:'15',
+      needs:['office'],
+      form:'recommend',
+      priority:'recommend'
+    };
+    q('#wizard').style.display='block';
+    q('#results').style.display='none';
+    q('#lead').style.display='none';
+    q('#formWrap').style.display='block';
+    q('#success').style.display='none';
+    q('#leadForm').reset();
+    renderQuestion();
+  });
+
+  renderQuestion();
+})();
+</script>
+</body>
+</html>
