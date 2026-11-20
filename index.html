@@ -199,6 +199,76 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
 .lead label{color:#fff}.formStatus{margin-top:14px;line-height:1.5;color:#eff4f8;font-size:14px}.lead .eyebrow{color:#ffb7be}
 .productLink,.projectLink{min-height:42px}.liveModelLink{line-height:1.35}.leadClose{color:#fff}
 @media(max-width:620px){.brandline{align-items:center}.logoMark img{width:155px;max-width:42vw}.intro-row{display:block}.intro-row .btn-secondary{margin-top:18px}.option{min-height:84px}.card,.lead{padding:20px}.stepLine{gap:5px}.dot{width:29px;height:29px;flex-basis:29px}}
+
+/* Compact layout for the planner embedded in a website page. */
+#app{margin:8px auto;padding:0 12px 18px}
+.card{padding:16px 20px;border-radius:16px}
+.brandline{align-items:center;margin-bottom:5px}
+.brandline .eyebrow{margin:0}.logoMark img{width:140px;max-width:38vw}
+.intro-row{align-items:center;gap:12px}
+.intro-row h1{font-size:25px;line-height:1.17;margin:0 0 4px}
+.intro-row .desc{font-size:14px;line-height:1.35;max-width:none}
+.intro-row .btn-secondary{min-height:40px;padding:9px 14px;white-space:nowrap}
+.progress{margin-top:10px;height:5px}.stepLine{display:none}
+.wizard{margin-top:10px}.questionLead{margin-top:5px}
+.questionLead h2{font-size:21px;line-height:1.22;margin:0}
+.helper{font-size:14px;line-height:1.35;margin-top:4px}
+.selectionHint{font-size:13px;margin-top:5px}
+.options{gap:8px;margin-top:10px}
+.option{min-height:68px;padding:10px 12px;border-radius:12px}
+.option.selected{padding:9px 11px}.optionTitle{font-size:15px;line-height:1.25}
+.optionSub{font-size:13px;line-height:1.3;margin-top:3px}
+.error{min-height:0;margin-top:0}.error:not(:empty){margin-top:7px}
+.actions{padding-top:10px;margin-top:11px}.btn{min-height:40px;padding:9px 16px}
+.results{margin-top:12px}.results>h2{font-size:23px;margin:4px 0}
+.results>.desc{font-size:14px;line-height:1.4}
+.briefSummary{margin-top:9px;padding:9px 12px}.briefLines{margin-top:7px;line-height:1.5}
+.resultsGrid{gap:9px;margin-top:10px}.productHead{min-height:72px;padding:8px 12px}
+.planPreview,.planPlaceholder{width:130px;min-width:130px;height:66px}.planThumb{height:66px}
+.productBody{padding:12px}.productTitle{font-size:16px}.productText{font-size:13px;line-height:1.35;margin-top:5px}
+.whyShown{font-size:13px;line-height:1.35;padding:6px 8px;margin-top:8px}
+.liveList{margin-top:8px;padding-top:8px}.liveModelLink{font-size:13px;line-height:1.3}
+.productActions{margin-top:9px}.resultActions{margin-top:10px;gap:8px}
+.lead{margin-top:10px;padding:16px 20px;border-radius:16px}
+.lead h2{font-size:26px;line-height:1.2;margin:0 130px 4px 0}
+.lead .eyebrow{margin-bottom:4px}.lead .leadSub{font-size:14px;line-height:1.35;margin-bottom:9px}
+.leadFocus{font-size:14px;margin:0 0 5px}.leadClose{top:16px;right:18px;font-size:13px;line-height:1.2;color:#fff;border:1px solid #778a9e;border-radius:8px;padding:7px 10px;opacity:1}
+.leadSummaryToggle{margin:0 0 10px;border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:8px 10px;font-size:13px}
+.leadSummaryToggle>summary{cursor:pointer;font-weight:700}
+.lead .summary{margin:8px 0 0;padding:10px;line-height:1.5}
+.formGrid{gap:8px 12px}.formGrid label{font-size:14px}
+.formGrid input,.formGrid textarea{margin-top:4px;padding:9px 10px;font-size:15px}
+.formGrid textarea{min-height:58px}.submitRow{margin-top:10px;gap:12px}
+.lead .submitNote{font-size:13px;line-height:1.4}.submitBtn{min-height:42px;padding:10px 18px}.formStatus{margin-top:8px}
+@media(min-width:920px){.options{grid-template-columns:repeat(4,minmax(0,1fr))}.formGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:601px) and (max-width:919px){.options{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){
+ #app{margin:6px auto;padding:0 8px 16px}.card,.lead{padding:14px}
+ .brandline{align-items:center;margin-bottom:5px}.logoMark img{width:120px;max-width:38vw}
+ .intro-row{display:flex;align-items:flex-start;gap:8px}.intro-row .btn-secondary{margin:0;flex:0 0 auto;padding:8px 10px}
+ .intro-row h1{font-size:20px}.intro-row .desc{font-size:13px}.questionLead h2{font-size:19px}
+ .options{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .option{min-height:70px;padding:9px}.option.selected{padding:8px}
+ .optionTitle{font-size:14px}.optionSub{font-size:12px}.actions{margin-top:10px;padding-top:10px}
+ .lead h2{font-size:23px;margin-right:115px}.leadClose{top:14px;right:14px}
+ .submitRow{display:block}.submitBtn{width:100%;margin-top:8px}
+}
+
+
+#app.showing-output{padding-bottom:6px}#app.showing-output>section[aria-label="Project planner introduction"]{padding:6px 12px}#app.showing-output .logoMark img{width:120px}
+#app.showing-output .intro-row,#app.showing-output .progress{display:none}
+#app.showing-output .brandline{margin:0}
+.resultsHead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.resultsHead h2{font-size:23px;line-height:1.2;margin:3px 0}
+.resultsHead .desc{font-size:14px;line-height:1.35;max-width:680px}
+.resultsHead .resultActions{margin:0;flex:0 0 auto;justify-content:flex-end}
+.productText{line-height:1.3}
+.whyShown{background:transparent;padding:0;margin-top:4px;line-height:1.3;color:#697078}
+.liveLabel{margin-bottom:3px}.liveModelLink{margin:4px 0;padding:6px 8px;min-height:34px}
+@media(max-width:760px){.resultsHead{display:block}.resultsHead .resultActions{margin-top:8px;justify-content:flex-start}.resultsHead h2{font-size:20px}}
+
+@media(max-width:600px){.intro-row .desc{display:none}.formGrid input,.formGrid textarea{font-size:16px}}
+@media(min-width:360px) and (max-width:600px){.formGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.formGrid .full{grid-column:1 / -1}}
 </style>
 </head>
 <body>
@@ -210,8 +280,8 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
     <div class="stepLine" aria-label="Five steps"><div class="dot active" data-dot="1">1</div><div class="line"></div><div class="dot" data-dot="2">2</div><div class="line"></div><div class="dot" data-dot="3">3</div><div class="line"></div><div class="dot" data-dot="4">4</div><div class="line"></div><div class="dot" data-dot="5">5</div></div>
   </section>
   <section id="wizard" class="card wizard" aria-live="polite"><div id="question"></div><div class="error" id="validation" role="status"></div><div class="actions"><button id="prev" class="btn btn-secondary" type="button">Back</button><button id="next" class="btn btn-primary" type="button">Continue</button></div></section>
-  <section id="results" class="results" aria-live="polite"><div class="eyebrow">Your project solution</div><h2 id="resultsTitle">Suggested solutions for your project</h2><p id="resultsText" class="desc"></p><details class="briefSummary" open><summary>Your project at a glance</summary><div id="resultsSummary" class="briefLines"></div></details><div id="resultsGrid" class="resultsGrid"></div><div class="card noteCard"><strong>What happens next?</strong><p class="smallNote" style="margin-top:8px">Explore the suggested layouts or tell Module-T UK about your project. We can discuss a tailored configuration when a standard model is not the right fit.</p><div class="resultActions"><button id="requestTop" class="btn btn-primary" type="button">Request a project quote</button><button id="editAnswers" class="btn btn-secondary" type="button">Edit answers</button></div></div></section>
-  <section id="lead" class="lead"><button id="leadClose" class="leadClose" type="button" aria-label="Close enquiry form">×</button><div id="formWrap"><div class="eyebrow">Module-T UK</div><h2>Request a quote</h2><p id="leadFocus" class="leadFocus" hidden></p><p class="leadSub">Add your contact details. Your project choices will be included in the email.</p><div id="leadSummary" class="summary"></div>
+  <section id="results" class="results" aria-live="polite"><div class="resultsHead"><div><div class="eyebrow">Your project solution</div><h2 id="resultsTitle">Suggested solutions for your project</h2><p id="resultsText" class="desc"></p></div><div class="resultActions"><button id="requestTop" class="btn btn-primary" type="button">Request a project quote</button><button id="editAnswers" class="btn btn-secondary" type="button">Edit answers</button></div></div><details class="briefSummary"><summary>Your project at a glance</summary><div id="resultsSummary" class="briefLines"></div></details><div id="resultsGrid" class="resultsGrid"></div></section>
+  <section id="lead" class="lead"><button id="leadClose" class="leadClose" type="button">Back to results</button><div id="formWrap"><div class="eyebrow">Module-T UK</div><h2>Request a quote</h2><p id="leadFocus" class="leadFocus" hidden></p><p class="leadSub">Add your contact details. Your project choices will be included in the email.</p><details class="leadSummaryToggle"><summary>Review project details</summary><div id="leadSummary" class="summary"></div></details>
     <form id="leadForm"><div class="formGrid compactForm"><label>Full name <span class="req">*</span><input name="name" autocomplete="name" required></label><label>Email <span class="req">*</span><input type="email" name="email" autocomplete="email" required></label><label>Telephone <span class="req">*</span><input type="tel" name="phone" autocomplete="tel" required></label><label>Company<input name="company" autocomplete="organization"></label><label>Town or city <span class="req">*</span><input name="city" autocomplete="address-level2" required></label><label>Postcode <span class="req">*</span><input name="postcode" autocomplete="postal-code" required></label><label class="full">Additional information<textarea name="message" placeholder="Tell us about your project, location or preferred delivery date"></textarea></label></div>
       <div class="submitRow"><p class="submitNote">This opens your email app with your details and project summary. Please review and send the email to Module-T UK.</p><button class="submitBtn" type="submit">Continue to email</button></div><p id="formMsg" class="formStatus" role="status"></p>
     </form></div></section>
@@ -267,7 +337,7 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
     }
    }
    const officeReason=answers.priority==='rooms'&&!n.includes('wc')&&!n.includes('kitchen')&&p<=15?'You selected an office and prioritised separate rooms.':'You selected an office or workspace.';
-   add('Office containers','Explore workspaces for project teams, management and site administration.',cat.office,ms,officeReason);
+   add('Office containers','Workspaces for your site team.',cat.office,ms,officeReason);
   }
   if(n.includes('wc')||n.includes('shower')){
    let ms=[];
@@ -277,11 +347,11 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
     else ms=[models.showerDouble];
    }
    const why=n.includes('wc')&&n.includes('shower')?'You selected toilets and showers.':n.includes('wc')?'You selected toilets.':'You selected showers.';
-   add('Toilet and shower cabins','Explore toilet, shower and washroom layouts.',cat.sanitary,ms,why);
+   add('Toilet and shower cabins','Toilet and shower layouts.',cat.sanitary,ms,why);
   }
   if(n.includes('changing')){
    let ms=[];if(p<=15)ms=n.includes('shower')?[models.changeShower,models.changeShower2]:[models.changeSmall,models.changeLarge];
-   add('Modular changing rooms','Explore changing and locker spaces for staff, site teams or sports clubs.',cat.changing,ms,'You selected a changing area.');
+   add('Modular changing rooms','Changing spaces for teams and clubs.',cat.changing,ms,'You selected a changing area.');
   }
   if(n.includes('security'))add('Security cabins','Explore reception, security and access-control spaces.',cat.security,[],'You selected security or reception.');
   if(n.includes('living'))add('Workforce accommodation','Discuss living and sleeping spaces for your project.',cat.modular,[],'You selected accommodation.',false);
@@ -299,8 +369,9 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
  }
  function showResults(){
   const items=solutions();
+  root.classList.add('showing-output');
   q('#wizard').style.display='none';q('#results').style.display='block';q('#lead').style.display='none';
-  q('#resultsText').textContent=answers.form==='compact'&&answers.needs.length>1?'These layouts may each meet part of your brief. We will check whether your selected spaces can be combined in one unit.':'These options reflect the spaces you selected. They are starting points; we will confirm the right layout, quantity and capacity with you.';
+  q('#resultsText').textContent=answers.form==='compact'&&answers.needs.length>1?'These options may cover different needs. We will check what fits in one unit.':'Options based on your selections. We will confirm the right layout and capacity.';
   q('#resultsGrid').classList.toggle('singleResult',items.length===1);
   q('#resultsSummary').textContent=briefText();
   q('#resultsGrid').innerHTML=items.map((x,i)=>{
@@ -310,17 +381,16 @@ body{font-size:16px}.desc{font-size:16px}.nobr{white-space:nowrap}.option{min-he
    return `<article class="product"><div class="productHead"><div class="productType">Suggested option</div>${head}</div><div class="productBody"><div class="productTitle">${x.title}</div><p class="productText">${x.description}</p><p class="whyShown">${x.reason}</p>${list}<div class="productActions"><a class="productLink" href="${x.url}" target="_blank" rel="noopener">View options</a><button class="projectLink openRequest" data-solution-index="${i}" aria-label="Request a quote for ${x.title}" type="button">Request a quote</button></div></div></article>`;
   }).join('');
   qa('.openRequest').forEach(b=>b.addEventListener('click',()=>openLead(items[Number(b.dataset.solutionIndex)].title)));
-  q('#results').scrollIntoView({behavior:'smooth',block:'start'});
  }
  function openLead(focus=null){
-  quoteFocus=focus;
+  quoteFocus=focus;root.classList.add('showing-output');
   q('#leadFocus').hidden=!focus;q('#leadFocus').textContent=focus?'Selected solution: '+focus:'';
   q('#leadSummary').textContent=(focus?'Enquiry about: '+focus+'\n':'')+summaryText();q('#leadSummary').style.whiteSpace='pre-line';
-  q('#lead').style.display='block';q('#lead').scrollIntoView({behavior:'smooth',block:'start'});
+  q('#results').style.display='none';q('#lead').style.display='block';
  }
  q('#next').addEventListener('click',()=>{const x=answers[questions[step].key];if(!x||(Array.isArray(x)&&!x.length)){q('#validation').textContent='Please choose an option to continue.';return}if(step<4){step++;render()}else showResults()});
- q('#prev').addEventListener('click',()=>{if(step>0){step--;render()}});q('#requestTop').addEventListener('click',()=>openLead());q('#leadClose').addEventListener('click',()=>q('#lead').style.display='none');q('#editAnswers').addEventListener('click',()=>{q('#results').style.display='none';q('#lead').style.display='none';q('#wizard').style.display='block';step=0;render();q('#wizard').scrollIntoView({behavior:'smooth',block:'start'})});
- q('#reset').addEventListener('click',()=>{step=0;answers=initial();quoteFocus=null;q('#wizard').style.display='block';q('#results').style.display='none';q('#lead').style.display='none';q('#leadForm').reset();q('#formMsg').textContent='';render()});
+ q('#prev').addEventListener('click',()=>{if(step>0){step--;render()}});q('#requestTop').addEventListener('click',()=>openLead());q('#leadClose').addEventListener('click',()=>{q('#lead').style.display='none';q('#results').style.display='block'});q('#editAnswers').addEventListener('click',()=>{q('#results').style.display='none';q('#lead').style.display='none';q('#wizard').style.display='block';root.classList.remove('showing-output');step=0;render()});
+ q('#reset').addEventListener('click',()=>{step=0;answers=initial();quoteFocus=null;root.classList.remove('showing-output');q('#wizard').style.display='block';q('#results').style.display='none';q('#lead').style.display='none';q('#leadForm').reset();q('#formMsg').textContent='';render()});
  if(FORMSPREE_ENDPOINT){
   q('.submitNote').textContent='Your contact details and project choices will be sent to Module-T UK.';
   q('.submitBtn').textContent='Send enquiry';
